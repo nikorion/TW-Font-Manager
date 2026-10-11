@@ -16,7 +16,6 @@ title: Internal Customization
 *$:/core/ui/Components/font-info
 ;Plugins
 *$:/styles/highlight.css
-*$:/plugins/kookma/shiraz/ui/Buttons/switch-palette
 ;Fonts
 *$:/fonts/Play
 *$:/fonts/Baumans
