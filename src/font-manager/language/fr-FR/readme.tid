@@ -1,13 +1,11 @@
 title: $:/plugins/nikorion/font-manager/language/fr-FR/readme
 type: text/vnd.tiddlywiki
 
-\whitespace trim
-
-Un gestionnaire de polices web pour TiddlyWiki. Déposez un fichier de police (`.woff2`, `.woff`, `.ttf`, `.otf`) sur le wiki : il devient un tiddler feuille de style autonome (`$:/fonts/<Nom>`, taggé ''$:/tags/Stylesheet'') contenant une règle &nbsp;`@font-face`&nbsp; avec la police embarquée en base64 — aucune requête réseau, fonctionne hors ligne et dans les wikis mono-fichier.
+Un gestionnaire de polices web pour TiddlyWiki. Déposez un fichier de police (`.woff2`, `.woff`, `.ttf`, `.otf`) sur le wiki : il devient un tiddler feuille de style autonome (`$:/fonts/<Nom>`, taggé ''$:/tags/Stylesheet'') contenant une règle `@font-face` avec la police embarquée en base64 — aucune requête réseau, fonctionne hors ligne et dans les wikis mono-fichier.
 
 ! Utilisation
 
-Glissez un fichier de police sur le wiki et importez-le depuis l'écran d'import habituel. Une fois importée, la police est disponible pour n'importe quelle CSS du wiki. Référencez-la par son nom avec &nbsp;`font-family`&nbsp;, par exemple dans un tiddler feuille de style :
+Glissez un fichier de police sur le wiki et importez-le depuis l'écran d'import habituel. Une fois importée, la police est disponible pour n'importe quelle CSS du wiki. Référencez-la par son nom avec `font-family`, par exemple dans un tiddler feuille de style :
 
 ```css
 .tc-tiddler-title { font-family: "Lobster"; }

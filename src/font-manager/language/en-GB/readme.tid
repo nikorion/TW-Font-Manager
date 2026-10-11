@@ -1,13 +1,11 @@
 title: $:/plugins/nikorion/font-manager/language/en-GB/readme
 type: text/vnd.tiddlywiki
 
-\whitespace trim
-
-A web font manager for TiddlyWiki. Drop a font file (`.woff2`, `.woff`, `.ttf`, `.otf`) onto the wiki: it is turned into a self-contained stylesheet tiddler (`$:/fonts/<Name>`, tagged ''$:/tags/Stylesheet'') holding a &nbsp;`@font-face`&nbsp; rule with the font embedded in base64 — no network request, works offline and in single-file wikis.
+A web font manager for TiddlyWiki. Drop a font file (`.woff2`, `.woff`, `.ttf`, `.otf`) onto the wiki: it is turned into a self-contained stylesheet tiddler (`$:/fonts/<Name>`, tagged ''$:/tags/Stylesheet'') holding a `@font-face` rule with the font embedded in base64 — no network request, works offline and in single-file wikis.
 
 ! Usage
 
-Drag a font file onto the wiki and import it from the usual import screen. Once imported, the typeface is available to any CSS in the wiki. Reference it by name with &nbsp;`font-family`&nbsp;, e.g. in a stylesheet tiddler:
+Drag a font file onto the wiki and import it from the usual import screen. Once imported, the typeface is available to any CSS in the wiki. Reference it by name with `font-family`, e.g. in a stylesheet tiddler:
 
 ```css
 .tc-tiddler-title { font-family: "Lobster"; }
