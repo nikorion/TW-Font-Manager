@@ -46,6 +46,10 @@ Sources are in `src/font-manager/`.
 
 ## Version history
 
+**v0.4.0**
+
+TTF/OTF files are converted to WOFF2 on import (vendored `woff2-encoder`, `pnpm vendor:woff2`; setting `convert-to-woff2`).
+
 **v0.3.0**
 
 Font manager: import of dropped font files; the bundled fonts moved out of the plugin.

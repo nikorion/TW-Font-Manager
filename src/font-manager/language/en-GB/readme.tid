@@ -20,3 +20,17 @@ Or inline in wikitext:
 ```
 
 The plugin itself ships no font. Fonts larger than about 300 KB get a note: prefer WOFF2, which is much lighter.
+
+! WOFF2 conversion
+
+`.ttf` and `.otf` files are converted to WOFF2 while they are imported (typically 40 to 80 % smaller). The encoder is only loaded the first time a font is converted. Turn this off in ''Settings'' > ''Font Manager''. `.woff` and `.woff2` files are kept as they are.
+
+! Saving to disk (Node.js wiki folders)
+
+With a wiki folder served by Node.js, TiddlyWiki writes an imported font next to your other tiddlers, as a flattened file such as `$__fonts_Lobster.css`. To keep them together in a sub-folder, add this line at the top of a tiddler titled `$:/config/FileSystemPaths` (one filter per line, the first match wins):
+
+```
+[prefix[$:/fonts/]search-replace:g:regexp[/|\\],[_]addprefix[fonts/]]
+```
+
+Fonts then go to `tiddlers/fonts/`. If you already have a `$:/config/FileSystemPaths` tiddler, add the line above the existing ones. This is a TiddlyWiki setting, so a plugin cannot do it for you; single-file wikis are not concerned.

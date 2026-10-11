@@ -46,6 +46,10 @@ Les sources sont dans `src/font-manager/`.
 
 ## Historique des versions
 
+**v0.4.0**
+
+Les fichiers TTF/OTF sont convertis en WOFF2 à l'import (`woff2-encoder` vendoré, `pnpm vendor:woff2` ; réglage `convert-to-woff2`).
+
 **v0.3.0**
 
 Gestionnaire de polices : import des fichiers de police déposés ; les polices embarquées sortent du plugin.

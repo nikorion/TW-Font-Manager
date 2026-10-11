@@ -8,13 +8,15 @@
   "scripts": {
     "dev": "node ../tw-dev/dev.cjs",
     "build": "tiddlywiki wiki --build plugin-json demo",
-    "lint": "eslint \"src/font-manager/modules/*.js\""
+    "lint": "eslint \"src/font-manager/modules/*.js\"",
+    "vendor:woff2": "node scripts/vendor-woff2.cjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
     "eslint": "^9.39.5",
     "globals": "^17.13.0",
     "nodemon": "^3.0.0",
-    "tiddlywiki": "^5.4.1"
+    "tiddlywiki": "^5.4.1",
+    "woff2-encoder": "^2.0.0"
   }
 }

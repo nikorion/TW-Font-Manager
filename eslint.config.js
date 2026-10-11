@@ -8,6 +8,7 @@ export default [
       "dist/**",
       "docs/**",
       "wiki/**",
+      "src/font-manager/modules/*.min.js",
     ],
   },
   {

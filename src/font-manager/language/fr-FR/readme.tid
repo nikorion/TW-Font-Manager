@@ -20,3 +20,17 @@ Ou en ligne dans du wikitext :
 ```
 
 Le plugin lui-même n'embarque aucune police. Au-delà d'environ 300 Ko, une note est ajoutée : préférez le WOFF2, bien plus léger.
+
+! Conversion en WOFF2
+
+Les fichiers `.ttf` et `.otf` sont convertis en WOFF2 pendant l'import (généralement 40 à 80 % plus légers). L'encodeur n'est chargé qu'à la première conversion. Désactivez-la dans ''Réglages'' > ''Font Manager''. Les fichiers `.woff` et `.woff2` sont conservés tels quels.
+
+! Enregistrement sur disque (dossiers wiki Node.js)
+
+Avec un dossier wiki servi par Node.js, TiddlyWiki écrit une police importée à côté de vos autres tiddlers, sous la forme d'un fichier aplati du type `$__fonts_Lobster.css`. Pour les regrouper dans un sous-dossier, ajoutez cette ligne en tête d'un tiddler intitulé `$:/config/FileSystemPaths` (un filtre par ligne, la première correspondance l'emporte) :
+
+```
+[prefix[$:/fonts/]search-replace:g:regexp[/|\\],[_]addprefix[fonts/]]
+```
+
+Les polices vont alors dans `tiddlers/fonts/`. Si vous avez déjà un tiddler `$:/config/FileSystemPaths`, ajoutez la ligne au-dessus des existantes. C'est un réglage de TiddlyWiki : un plugin ne peut pas le faire à votre place ; les wikis mono-fichier ne sont pas concernés.

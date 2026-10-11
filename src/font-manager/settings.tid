@@ -3,4 +3,6 @@ tags: $:/tags/ControlPanel/SettingsTab
 caption: <<font-manager-lingo Configs/Caption>>
 type: text/vnd.tiddlywiki
 
-Coming soon.
+<$checkbox tiddler="$:/config/nikorion/font-manager/convert-to-woff2" field="text" checked="yes" unchecked="no" default="yes"> <<font-manager-lingo Settings/ConvertToWoff2/Label>></$checkbox>
+
+//<<font-manager-lingo Settings/ConvertToWoff2/Hint>>//

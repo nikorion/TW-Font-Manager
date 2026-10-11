@@ -13,6 +13,8 @@ normal import screen (list, checkboxes, renaming).
 
 The tiddler format is the one the plugin already ships: `$:/fonts/<Name>`,
 tagged `$:/tags/Stylesheet`, holding a `@font-face` rule with a base64 data URI.
+TTF and OTF files are converted to WOFF2 on the way in (bundled WASM encoder,
+loaded lazily; `$:/config/nikorion/font-manager/convert-to-woff2`).
 Pure browser JS: identical behaviour standalone and client/server.
 \*/
 
@@ -23,7 +25,7 @@ exports.platforms = ["browser"];
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
-// Warn above this size (bytes of the original file): base64 adds ~33 %
+// Warn above this size (bytes of the final font): base64 adds ~33 %
 const LARGE_FONT_BYTES = 300 * 1024;
 
 // Core registers these four as base64 file types (boot.js)
@@ -34,12 +36,49 @@ const FORMATS = {
 	"font/otf": "opentype"
 };
 
+// Formats the bundled encoder turns into WOFF2 (WOFF v1 gains too little)
+const CONVERTIBLE = ["font/ttf", "font/otf"];
+const CONFIG_CONVERT = "$:/config/nikorion/font-manager/convert-to-woff2";
+const ENCODER = "$:/plugins/nikorion/font-manager/modules/woff2-encoder.min.js";
+
 function familyFromFileName(name) {
 	return (name || "Untitled font")
 		.replace(/\.[^.]+$/, "")
 		.replace(/[_]+/g, " ")
 		.replace(/[\\/'"{}]+/g, "")
 		.trim() || "Untitled font";
+}
+
+function bytesToBase64(bytes) {
+	let binary = "";
+	const chunk = 0x8000;
+	for(let i = 0; i < bytes.length; i += chunk) {
+		binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+	}
+	return btoa(binary);
+}
+
+function buildFields(family, mime, format, base64, size, note) {
+	const fields = {
+		title: "$:/fonts/" + family,
+		type: "text/css",
+		tags: "$:/tags/Stylesheet",
+		"font-family": family,
+		"font-format": format,
+		text: "@font-face {\n" +
+			"\tfont-family: '" + family + "';\n" +
+			"\tfont-weight: normal;\n" +
+			"\tfont-style: normal;\n" +
+			"\tsrc: url(data:" + mime + ";base64," + base64 + ") format('" + format + "');\n" +
+			"}\n"
+	};
+	if(note) {
+		fields.note = note;
+	} else if(size > LARGE_FONT_BYTES) {
+		fields.note = "Large font (" + Math.round(size / 1024) + " KB)" +
+			(format === "woff2" ? "." : ": consider converting to WOFF2.");
+	}
+	return fields;
 }
 
 exports.startup = function() {
@@ -50,33 +89,41 @@ exports.startup = function() {
 		}
 		const file = info.file,
 			family = familyFromFileName(file.name),
+			convert = CONVERTIBLE.indexOf(info.type) !== -1 &&
+				$tw.wiki.getTiddlerText(CONFIG_CONVERT, "yes").trim() === "yes",
 			reader = new FileReader();
-		reader.onload = function(event) {
-			const dataUri = event.target.result,
-				base64 = dataUri.substring(dataUri.indexOf(",") + 1),
-				fields = {
-					title: "$:/fonts/" + family,
-					type: "text/css",
-					tags: "$:/tags/Stylesheet",
-					"font-family": family,
-					"font-format": format,
-					text: "@font-face {\n" +
-						"\tfont-family: '" + family + "';\n" +
-						"\tfont-weight: normal;\n" +
-						"\tfont-style: normal;\n" +
-						"\tsrc: url(data:" + info.type + ";base64," + base64 + ") format('" + format + "');\n" +
-						"}\n"
-				};
-			if(file.size > LARGE_FONT_BYTES) {
-				fields.note = "Large font (" + Math.round(file.size / 1024) + " KB)" +
-					(format === "woff2" ? "." : ": consider converting to WOFF2.");
-			}
-			info.callback([fields]);
-		};
 		reader.onerror = function() {
 			info.callback([]);
 		};
-		reader.readAsDataURL(file);
+		if(convert) {
+			reader.onload = function(event) {
+				const original = new Uint8Array(event.target.result),
+					asIs = function(note) {
+						return buildFields(family, info.type, format, bytesToBase64(original), original.length, note);
+					};
+				let encoder;
+				try {
+					encoder = require(ENCODER);
+				} catch(e) {
+					info.callback([asIs("WOFF2 conversion unavailable: " + e.message)]);
+					return;
+				}
+				encoder.compress(original).then(function(woff2) {
+					const note = "Converted to WOFF2 (" + Math.round(original.length / 1024) + " KB to " +
+						Math.round(woff2.length / 1024) + " KB).";
+					info.callback([buildFields(family, "font/woff2", "woff2", bytesToBase64(woff2), woff2.length, note)]);
+				}, function(error) {
+					info.callback([asIs("WOFF2 conversion failed (" + (error && error.message || error) + "), original kept.")]);
+				});
+			};
+			reader.readAsArrayBuffer(file);
+		} else {
+			reader.onload = function(event) {
+				const dataUri = event.target.result;
+				info.callback([buildFields(family, info.type, format, dataUri.substring(dataUri.indexOf(",") + 1), file.size)]);
+			};
+			reader.readAsDataURL(file);
+		}
 		return true;
 	});
 };

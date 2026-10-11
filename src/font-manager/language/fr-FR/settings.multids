@@ -1,3 +1,5 @@
 title: $:/plugins/nikorion/font-manager/language/fr-FR/
 
 Configs/Caption: Font Manager
+Settings/ConvertToWoff2/Label: Convertir les polices TTF et OTF en WOFF2 à l'import
+Settings/ConvertToWoff2/Hint: Les fichiers WOFF2 sont environ 40 % plus légers. L'encodeur (environ 1 Mo) n'est chargé qu'à la première conversion.

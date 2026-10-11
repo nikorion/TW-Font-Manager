@@ -1,6 +1,7 @@
 title: $:/plugins/nikorion/font-manager/language/fr-FR/history
 type: text/vnd.tiddlywiki
 
+* ''0.4.0'' -- 2026.10.11 -- Les fichiers `.ttf` et `.otf` sont convertis en WOFF2 pendant l'import (encodeur WebAssembly embarqué, chargé à la première utilisation ; désactivable dans les réglages). Une police dont la conversion échoue est conservée telle quelle, avec une note. Le readme explique comment ranger les polices dans leur propre dossier avec un dossier wiki Node.js.
 * ''0.3.0'' -- 2026.10.10 -- Le plugin n'embarque plus aucune police : il devient un gestionnaire de polices. Déposer un fichier `.woff2`/`.woff`/`.ttf`/`.otf` sur le wiki crée désormais un tiddler feuille de style `$:/fonts/<Nom>` prêt à l'emploi (hook `th-importing-file`). L'ancienne collection embarquée est passée dans le wiki de développement et la démo en ligne ; installer la 0.3.0 par-dessus la 0.2.0 retire ces polices.
 * ''0.2.0'' -- 2026.08.17 -- Localisation de la licence et de l'historique des versions : `licence.tid` et `history.tid` sont désormais des sélecteurs de langue qui transcluent en mode bloc `language/<lang>/licence` et `language/<lang>/history`, avec repli sur en-GB — même montage que `readme.tid`. Le corps de la licence reste en anglais dans toutes les langues : seul le texte d'origine d'une licence fait foi, seul son encadrement est traduit (introduction, titres, prose des //Composants tiers//).
 * ''0.1.0'' -- 2026.07.16 -- Bonjour !

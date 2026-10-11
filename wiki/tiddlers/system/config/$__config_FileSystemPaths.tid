@@ -5,4 +5,5 @@ modifier: nikorion
 title: $:/config/FileSystemPaths
 type: text/vnd.tiddlywiki
 
+[prefix[$:/fonts/]search-replace:g:regexp[/|\\],[_]addprefix[system/fonts/]]
 [prefix[$:/]search-replace:g:regexp[/|\\],[_]addprefix[system/]]

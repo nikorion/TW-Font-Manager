@@ -3,13 +3,13 @@
 > **Avant toute tâche sur ce plugin, consulter d'abord le `CLAUDE.md` du workspace** (`../CLAUDE.md`) et ses `guides/` : outillage de dev commun (pnpm, `dev.cjs`/HMR, Ctrl+C, git push), pièges PowerShell/Windows, `publishFilter`, symlink. Ci-dessous : uniquement le spécifique à TW-Font-Manager.
 
 ## Ce que c'est
-Plugin TiddlyWiki (`$:/plugins/nikorion/font-manager`) = gestionnaire de polices (v0.3.0, 2026-10-10) : un fichier de police déposé sur le wiki devient un tiddler stylesheet base64. Le plugin **n'embarque plus aucune police**. Auteur : nikorion. Décisions et état : section « Décisions de conception » ci-dessous (ex-`BRIEF-gestionnaire-polices.md`, 2026-10-10, supprimé).
+Plugin TiddlyWiki (`$:/plugins/nikorion/font-manager`) = gestionnaire de polices (v0.4.0, 2026-10-11) : un fichier de police déposé sur le wiki devient un tiddler stylesheet base64. Le plugin **n'embarque plus aucune police**. Auteur : nikorion. Décisions et état : section « Décisions de conception » ci-dessous (ex-`BRIEF-gestionnaire-polices.md`, 2026-10-10, supprimé).
 
 ## Structure
 ```
 src/font-manager/                       ← sources du plugin (seul dossier à toucher)
   modules/startup.js             ← hook th-importing-file (import des fichiers de police)
-  plugin.info                    ← métadonnées du plugin (v0.3.0)
+  plugin.info                    ← métadonnées du plugin (v0.4.0)
 
 wiki/                            ← wiki TW de développement
   tiddlers/system/fonts/         ← 38 polices de démo (base64), réelles — pas dans le plugin ; gardées par la démo publiée, à piocher ensuite pour les wikis de prod (glisser-déposer)
@@ -41,4 +41,4 @@ Objectif : gestionnaire central des polices d'un wiki, standalone **et** serveur
 - **Détection prévue** : `[all[shadows+tiddlers]tag[$:/tags/Stylesheet]prefix[$:/fonts/]]` + tout tiddler dont le texte contient `@font-face` ; bonus : lister les `font-family` utilisées dans les CSS du wiki sans `@font-face` (ex. « Inter » dans kms-prod, jamais déclarée).
 - **UI prévue** : liste filtrable (type, note, plugin d'origine), aperçu texte clair/sombre, renommage, suppression, doublons de `font-family` (base : tiddlers `user/TW/Aperçu fonts*.tid` du wiki praxisland, chemin dans `CLAUDE.local.md`).
 - **Poids** : les 38 polices en base64 pèsent plusieurs Mo par wiki → le plugin n'embarque rien (tranché) ; l'idée « bibliothèque optionnelle `fonts-library` » ou « n'émettre le `@font-face` que des polices activées (`$:/config/fonts/<nom>`) » reste possible si besoin.
-- **Ouvert (V2)** : conversion TTF/OTF → WOFF2 à l'import (encodeur WOFF2 JS/WASM ~200 Ko).
+- **Conversion TTF/OTF → WOFF2 à l'import** (2026-10-11) : module vendoré `modules/woff2-encoder.min.js` (lib npm `woff2-encoder`, MIT, ~1 Mo, WASM inline, `module-type: library` donc chargé seulement au 1er `require()` du hook), régénéré par `pnpm vendor:woff2` (`scripts/vendor-woff2.cjs`, retire l'`export` ESM final) — **jamais édité à la main**, exclu d'ESLint. Réglage `$:/config/nikorion/font-manager/convert-to-woff2` (défaut `yes`, case dans `settings.tid`) ; repli sur la police d'origine + champ `note` si l'encodeur échoue. `.woff` (v1) non converti. Pas d'ES module : ne pas importer la lib en `import`.
