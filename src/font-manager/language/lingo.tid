@@ -9,3 +9,7 @@ tags: $:/tags/Global
 </$transclude>
 </$let>
 \end
+
+\function font-manager-lingo-text(title)
+[[$:/language]get[text]get[name]else[en-GB]addprefix[$:/plugins/nikorion/font-manager/language/]addsuffix[/]addsuffix<title>get[text]] :else[[$:/plugins/nikorion/font-manager/language/en-GB/]addsuffix<title>get[text]] :else[<title>]
+\end

@@ -4,11 +4,9 @@
         "tiddlywiki/filesystem",
         "tiddlywiki/tiddlyweb",
         "nikorion/font-manager",
-        "tiddlywiki/highlight",
-        "tiddlywiki/katex",
+        "nikorion/pkm",
         "nikorion/plugin-info-tree",
         "nikorion/scroll-layout",
-        "nikorion/math",
         "nikorion/detect-language"
     ],
     "themes": [
@@ -61,7 +59,7 @@
             "text/plain",
             "",
             "publishFilter",
-            "-[[$:/config/SyncFilter]] -[[$:/config/FileSystemPaths]] -[[$:/config/OriginalTiddlerPaths]] -[[$:/plugins/kookma/commander]] -[[$:/plugins/oeyoews/tiddlywiki-codemirror-6]] -[[$:/plugins/wikilabs/link-to-tabs]] -[[Welcome !]] -[[ToDo]]",
+            "-[[$:/config/SyncFilter]] -[[$:/config/FileSystemPaths]] -[[$:/config/OriginalTiddlerPaths]] -[[$:/plugins/wikilabs/link-to-tabs]]",
             "--render",
             "$:/core/templates/tiddlywiki5.js",
             "[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]",

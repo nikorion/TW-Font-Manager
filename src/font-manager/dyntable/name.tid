@@ -1,0 +1,8 @@
+tags: $:/tags/nk-dyntable/BodyTemplate
+nk-dyntable-column-list: nk-font-name
+nk-dyntable-sort-filter: [removeprefix[$:/fonts/]]
+title: $:/plugins/nikorion/font-manager/dyntable/body/name
+type: text/vnd.tiddlywiki
+
+<td><$draggable tiddler=<<currentRecord>> tag="span"><$link to=<<currentRecord>>><$text text={{{ [<currentRecord>removeprefix[$:/fonts/]] }}}/></$link></$draggable></td>
+<!-- Font name column of the font table (fonts.tid): the link can be dragged onto another wiki to install the font there. -->

@@ -1,12 +1,4 @@
 title: $:/nikorion/language/fr-FR/FontsDemo/
 
 Subtitle: gestionnaire de polices
-Intro: ''Font Manager'' transforme des fichiers de police en tiddlers de feuille de style prêts à l'emploi : déposez un fichier `.woff2`, `.woff`, `.ttf` ou `.otf` sur le wiki et il rejoint la liste d'import comme n'importe quel fichier.
-TryHeading: ! Essayer
-TryBody: Glissez un fichier de police depuis votre ordinateur sur cette fenêtre, puis importez-le depuis l'écran d'import. Le nouveau tiddler `$:/fonts/<Nom>` (taggé `$:/tags/Stylesheet`) contient la règle `@font-face` avec la police embarquée en base64 : il fonctionne hors ligne et dans les wikis mono-fichier.
-SizeNote: Au-delà d'environ 300 Ko, un champ `note` est ajouté ; préférez le WOFF2, bien plus léger.
-LibraryHeading: ! Polices de démo
-LibraryBody: Le plugin lui-même n'embarque aucune police. Ce wiki contient une collection d'exemple sous forme de tiddlers ordinaires : glissez une entrée ci-dessous sur une autre fenêtre TiddlyWiki pour l'y installer.
-UsageHeading: ! Utiliser une police
-UsageBody: Référencez-la par son nom avec `font-family`, dans un tiddler feuille de style ou en ligne avec `@@font-family:"Nom";texte@@`. Voir [[Webfont Tiddler Usage]].
 Sample: Portez ce vieux whisky au juge blond qui fume

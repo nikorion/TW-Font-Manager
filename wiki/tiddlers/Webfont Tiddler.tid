@@ -1,32 +1,35 @@
 created: 20251208231630881
 creator: nikorion
-modified: 20251209021133881
+modified: 20261011213810053
 modifier: nikorion
 tags: 
 title: Webfont Tiddler
 
-|!Title|`$:/fonts/<font_name>.css`|
+A font is stored as a single stylesheet tiddler: the font file is embedded in the `@font-face` rule as a base64 data URI, so nothing is fetched from the network and the font works offline and in single-file wikis.
+
+|!Title|`$:/fonts/<font name>`|
 |!Tags|`$:/tags/Stylesheet`|
 |!Type|`text/css`|
+|!Index fields|`font-family`, `font-format`, `font-type` (sans, serif, mono, script, fantasy), `note`|
 
 ```css
 @font-face {
-    font-family: "<font_name>";
-	font-weight: normal;
+    font-family: "<font name>";
+    font-weight: normal;
     font-style: normal;
-    src: url(data:application/font-woff2;charset=utf-8;base64,<<<CODE>>>);
+    src: url(data:font/woff2;base64,<<<CODE>>>) format("woff2");
 }
 ```
 
-__Applications __: font-woff, font-woff2, font-ttf, font-otf, etc.
+!! Creating one
 
-!!Fonts Sources
+Drop a `.woff2`, `.woff`, `.ttf` or `.otf` file onto the wiki and confirm the import: the plugin builds the tiddler above for you. `.ttf` and `.otf` files are converted to WOFF2 on the way in (see the plugin's settings).
+
+To write one by hand, create a tiddler with the title, tag and type above and paste the `@font-face` rule, with `src` last.
+
+!! Fonts Sources
 
 *[[dafont.com|https://www.dafont.com/fr/]]
 *[[fontlibrary.org|https://fontlibrary.org/]]
 *[[fontsquirrel.com|https://www.fontsquirrel.com/]]
-
-!!Base-64 Converters
-
-*[[giftofspeed.com|https://www.giftofspeed.com/base64-encoder/]]
-*[[transfonter.org|https://transfonter.org/]]
+*[[Google Fonts|https://fonts.google.com/]]

@@ -1,0 +1,7 @@
+tags: $:/tags/nk-dyntable/BodyTemplate
+nk-dyntable-column-list: nk-font-type
+nk-dyntable-sort-filter: [get[font-type]]
+title: $:/plugins/nikorion/font-manager/dyntable/body/type
+type: text/vnd.tiddlywiki
+
+<td><$text text={{{ [<currentRecord>get[font-type]] }}}/></td>

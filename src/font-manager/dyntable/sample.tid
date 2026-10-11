@@ -1,0 +1,8 @@
+tags: $:/tags/nk-dyntable/BodyTemplate
+nk-dyntable-column-list: nk-font-sample
+nk-dyntable-sort-filter: [removeprefix[$:/fonts/]]
+title: $:/plugins/nikorion/font-manager/dyntable/body/sample
+type: text/vnd.tiddlywiki
+
+<td><span style={{{ [<currentRecord>removeprefix[$:/fonts/]addprefix[font-family:"]addsuffix[";font-size:1.3em;]] }}}><<font-manager-lingo Fonts/Sample>></span></td>
+<!-- Preview column: a sample sentence set in the font itself (family = the tiddler title without `$:/fonts/`). -->

@@ -46,6 +46,10 @@ Sources are in `src/font-manager/`.
 
 ## Version history
 
+**v0.5.0**
+
+New "Fonts" tab in the plugin info panel (`fonts.tid`): a Dynamic Table listing of the installed fonts when `nikorion/dyntable` is loaded (columns in `dyntable/`), a plain list otherwise; `rank` field for star ratings.
+
 **v0.4.0**
 
 TTF/OTF files are converted to WOFF2 on import (vendored `woff2-encoder`, `pnpm vendor:woff2`; setting `convert-to-woff2`).

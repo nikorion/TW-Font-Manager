@@ -6,11 +6,4 @@ tags:
 title: Locally Available Webfonts
 type: text/vnd.tiddlywiki
 
-\whitespace trim
-\procedure sample-style() font-family:"$(currentTiddler)$";
-
-<ul>
-<$list filter="[prefix[$:/fonts/]sort[title]]">
-<li><$draggable tiddler=<<currentTiddler>> tag="span"><$link><$text text={{{ [<currentTiddler>removeprefix[$:/fonts/]] }}}/></$link></$draggable> — <span style={{{ [<currentTiddler>removeprefix[$:/fonts/]addprefix[font-family:"]addsuffix[";font-size:1.3em;]] }}}><<detect-language-lingo "FontsDemo/Sample">></span></li>
-</$list>
-</ul>
+{{$:/plugins/nikorion/font-manager/fonts}}

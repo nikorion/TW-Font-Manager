@@ -1,0 +1,22 @@
+title: $:/plugins/nikorion/font-manager/fonts
+caption: <<font-manager-lingo Fonts/Caption>>
+type: text/vnd.tiddlywiki
+
+<!-- Installed fonts. With the Dynamic Table plugin (alone or inside the pkm plugin) the list is a sortable table
+  using the columns of ./dyntable/ ; without it, a plain list. Fonts are the `$:/fonts/` tiddlers. -->
+<%if [[$:/plugins/nikorion/dyntable/procedures/nk-dyntable]is[shadow]] [[$:/plugins/nikorion/pkm/dyntable/procedures/nk-dyntable]is[shadow]] +[limit[1]] %>
+
+<<dyntable filter="[prefix[$:/fonts/]sort[title]]" fields="nk-font-name nk-font-sample nk-font-type nk-font-rank" editButton="no" stateTiddler="$:/plugins/nikorion/font-manager/fonts">>
+
+<%else%>
+
+<ul>
+<$list filter="[prefix[$:/fonts/]sort[title]]">
+<$let name={{{ [<currentTiddler>removeprefix[$:/fonts/]] }}}>
+<li><$draggable tiddler=<<currentTiddler>> tag="span"><$link><$text text=<<name>>/></$link></$draggable> — <span style={{{ [<name>addprefix[font-family:"]addsuffix[";font-size:1.3em;]] }}}><<font-manager-lingo Fonts/Sample>></span> <$list filter="[<currentTiddler>get[rank]!is[blank]]" variable="nk-rank"><$text text=<<nk-rank>>/></$list></li>
+</$let>
+<$list-empty><li><<font-manager-lingo Fonts/Empty>></li></$list-empty>
+</$list>
+</ul>
+
+<%endif%>

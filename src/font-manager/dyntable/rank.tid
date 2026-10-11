@@ -1,0 +1,8 @@
+tags: $:/tags/nk-dyntable/BodyTemplate
+nk-dyntable-column-list: nk-font-rank
+nk-dyntable-sort-filter: [get[rank]]
+title: $:/plugins/nikorion/font-manager/dyntable/body/rank
+type: text/vnd.tiddlywiki
+
+<td><$text text={{{ [<currentRecord>get[rank]] }}}/></td>
+<!-- Rank: stars kept in the `rank` field of the font tiddler (★ to ★★★★); sorting is on the string, so more stars sort later. -->

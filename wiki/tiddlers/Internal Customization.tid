@@ -14,8 +14,6 @@ title: Internal Customization
 *$:/core/macros/font-preview
 *$:/core/macros/font-edition
 *$:/core/ui/Components/font-info
-;Plugins
-*$:/styles/highlight.css
 ;Fonts
 *$:/fonts/Play
 *$:/fonts/Baumans

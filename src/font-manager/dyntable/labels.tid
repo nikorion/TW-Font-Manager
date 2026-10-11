@@ -1,0 +1,5 @@
+tags: $:/tags/nk-dyntable/ColumnLabelFilter
+title: $:/plugins/nikorion/font-manager/dyntable/labels
+type: text/vnd.tiddlywiki
+
+[<currentColumn>match[nk-font-name]] [<currentColumn>match[nk-font-sample]] [<currentColumn>match[nk-font-type]] [<currentColumn>match[nk-font-rank]] +[removeprefix[nk-font-]addprefix[Fonts/Column/]] :map[function[font-manager-lingo-text],<currentTiddler>]

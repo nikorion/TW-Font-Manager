@@ -1,0 +1,9 @@
+title: $:/plugins/nikorion/font-manager/language/fr-FR/
+
+Fonts/Caption: Polices
+Fonts/Sample: Portez ce vieux whisky au juge blond qui fume
+Fonts/Empty: Aucune police installée. Déposez un fichier de police sur le wiki.
+Fonts/Column/name: Police
+Fonts/Column/sample: Aperçu
+Fonts/Column/type: Type
+Fonts/Column/rank: Classement

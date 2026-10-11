@@ -1,7 +1,7 @@
 title: $:/plugins/nikorion/font-manager/language/en-GB/readme
 type: text/vnd.tiddlywiki
 
-A web font manager for TiddlyWiki. Drop a font file (`.woff2`, `.woff`, `.ttf`, `.otf`) onto the wiki: it is turned into a self-contained stylesheet tiddler (`$:/fonts/<Name>`, tagged ''$:/tags/Stylesheet'') holding a `@font-face` rule with the font embedded in base64 — no network request, works offline and in single-file wikis.
+A web font manager for TiddlyWiki. Drop a font file (`.woff2`, `.woff`, `.ttf`, `.otf`) onto the wiki: it is turned into a self-contained stylesheet tiddler (`$:/fonts/<Name>`, content type (MIME type) `text/css`, tagged ''$:/tags/Stylesheet'') holding a `@font-face` rule with the font embedded in base64 — no network request, works offline and in single-file wikis.
 
 ! Usage
 
@@ -17,7 +17,7 @@ Or inline in wikitext:
 @@font-family:"Caveat Brush";Some fancy text@@
 ```
 
-The plugin itself ships no font. Fonts larger than about 300 KB get a note: prefer WOFF2, which is much lighter.
+Imported fonts are always stored as `text/css` tiddlers. TiddlyWiki does not strictly require it for a stylesheet, but it is the right choice: with the default wikitext type, TiddlyWiki would parse the very long base64 data as wikitext (slow, and a `//` sequence, which base64 can contain, would be read as italic markup and corrupt the font). If you create a font tiddler by hand, give it the `text/css` type too. The plugin itself ships no font.
 
 ! WOFF2 conversion
 
@@ -28,7 +28,7 @@ The plugin itself ships no font. Fonts larger than about 300 KB get a note: pref
 With a wiki folder served by Node.js, TiddlyWiki writes an imported font next to your other tiddlers, as a flattened file such as `$__fonts_Lobster.css`. To keep them together in a sub-folder, add this line at the top of a tiddler titled `$:/config/FileSystemPaths` (one filter per line, the first match wins):
 
 ```
-[prefix[$:/fonts/]search-replace:g:regexp[/|\\],[_]addprefix[fonts/]]
+[prefix[$:/fonts/]search-replace:g:regexp[/|\\],[_]addprefix[system/fonts/]]
 ```
 
-Fonts then go to `tiddlers/fonts/`. If you already have a `$:/config/FileSystemPaths` tiddler, add the line above the existing ones. This is a TiddlyWiki setting, so a plugin cannot do it for you; single-file wikis are not concerned.
+Fonts then go to `tiddlers/system/fonts/`. If you already have a `$:/config/FileSystemPaths` tiddler, add the line above the existing ones. This is a TiddlyWiki setting, so a plugin cannot do it for you; single-file wikis are not concerned.

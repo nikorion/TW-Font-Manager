@@ -1,0 +1,9 @@
+title: $:/plugins/nikorion/font-manager/language/en-GB/
+
+Fonts/Caption: Fonts
+Fonts/Sample: Sphinx of black quartz, judge my vow
+Fonts/Empty: No font installed yet. Drop a font file onto the wiki.
+Fonts/Column/name: Font
+Fonts/Column/sample: Preview
+Fonts/Column/type: Type
+Fonts/Column/rank: Rank

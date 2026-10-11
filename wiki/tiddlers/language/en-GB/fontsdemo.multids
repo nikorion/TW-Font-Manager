@@ -1,12 +1,4 @@
 title: $:/nikorion/language/en-GB/FontsDemo/
 
 Subtitle: font manager
-Intro: ''Font Manager'' turns font files into ready-to-use stylesheet tiddlers: drop a `.woff2`, `.woff`, `.ttf` or `.otf` file onto the wiki and it joins the import list like any other file.
-TryHeading: ! Try it
-TryBody: Drag a font file from your computer onto this window, then import it from the import screen. The new tiddler `$:/fonts/<Name>` (tagged `$:/tags/Stylesheet`) holds the `@font-face` rule with the font embedded in base64, so it works offline and in single-file wikis.
-SizeNote: Fonts above about 300 KB get a `note` field; prefer WOFF2, which is much lighter.
-LibraryHeading: ! Demo fonts
-LibraryBody: The plugin itself ships no font. This wiki holds a sample collection as ordinary tiddlers: drag any entry below onto another TiddlyWiki window to install it there.
-UsageHeading: ! Using a font
-UsageBody: Reference it by name with `font-family`, in a stylesheet tiddler or inline with `@@font-family:"Name";text@@`. See [[Webfont Tiddler Usage]].
 Sample: Sphinx of black quartz, judge my vow
