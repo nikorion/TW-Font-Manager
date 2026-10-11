@@ -10,6 +10,8 @@ title: Internal Customization
 ;Palettes
 *$:/palettes/SpartanDayNikorion
 *$:/palettes/SpartanNightNikorion
+;Plugins
+*$:/styles/highlight.css
 ;Macros
 *$:/core/macros/font-preview
 *$:/core/macros/font-edition
