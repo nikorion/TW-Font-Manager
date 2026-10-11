@@ -1,7 +1,8 @@
 created: 20251208231418844
 creator: nikorion
-modified: 20251210124731684
+modified: 20261011175045000
 modifier: nikorion
 title: $:/DefaultTiddlers
 
-[[Welcome !]] [[ToDo]]
+$:/plugins/nikorion/font-manager
+[[Welcome !]is[tiddler]] [[ToDo]is[tiddler]]
