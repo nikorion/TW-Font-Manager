@@ -17,7 +17,7 @@ Drop a `.woff2`/`.woff`/`.ttf`/`.otf` file onto the wiki: a `th-importing-file` 
 
 **From the nikorion plugin library** (TiddlyWiki then offers each new version as an update):
 
-1. On [nikorion.github.io/tw-plugins](https://nikorion.github.io/tw-plugins/), drag the **nikorion plugin library** button onto your wiki (once per wiki).
+1. On [nikorion.github.io/TW-Plugin-Library](https://nikorion.github.io/TW-Plugin-Library/), drag the **nikorion plugin library** button onto your wiki (once per wiki).
 2. Open *Control Panel → Plugins → Get more plugins → Open plugin library*, choose the nikorion tab and install **Fonts**.
 
 **By hand**: download [`TW-Font-Manager-Plugin.json`](https://nikorion.github.io/TW-Font-Manager/TW-Font-Manager-Plugin.json) and drag it onto your wiki.
