@@ -1,9 +1,0 @@
-created: 20251208232934964
-creator: nikorion
-modified: 20261010190000000
-modifier: nikorion
-tags: 
-title: Locally Available Webfonts
-type: text/vnd.tiddlywiki
-
-{{$:/plugins/nikorion/font-manager/fonts}}

@@ -2,9 +2,9 @@ title: $:/plugins/nikorion/font-manager/fonts
 caption: <<font-manager-lingo Fonts/Caption>>
 type: text/vnd.tiddlywiki
 
-<!-- Installed fonts. With the Dynamic Table plugin (alone or inside the pkm plugin) the list is a sortable table
+<!-- Installed fonts. With the Dynamic Table plugin the list is a sortable table
   using the columns of ./dyntable/ ; without it, a plain list. Fonts are the `$:/fonts/` tiddlers. -->
-<%if [[$:/plugins/nikorion/dyntable/procedures/nk-dyntable]is[shadow]] [[$:/plugins/nikorion/pkm/dyntable/procedures/nk-dyntable]is[shadow]] +[limit[1]] %>
+<%if [[$:/plugins/nikorion/dyntable/procedures/nk-dyntable]is[shadow]] %>
 
 <<dyntable filter="[prefix[$:/fonts/]sort[title]]" fields="nk-font-name nk-font-sample nk-font-type nk-font-rank" editButton="no" stateTiddler="$:/plugins/nikorion/font-manager/fonts">>
 

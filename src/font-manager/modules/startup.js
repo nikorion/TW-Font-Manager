@@ -109,9 +109,7 @@ exports.startup = function() {
 					return;
 				}
 				encoder.compress(original).then(function(woff2) {
-					const note = "Converted to WOFF2 (" + Math.round(original.length / 1024) + " KB to " +
-						Math.round(woff2.length / 1024) + " KB).";
-					info.callback([buildFields(family, "font/woff2", "woff2", bytesToBase64(woff2), woff2.length, note)]);
+					info.callback([buildFields(family, "font/woff2", "woff2", bytesToBase64(woff2), woff2.length)]);
 				}, function(error) {
 					info.callback([asIs("WOFF2 conversion failed (" + (error && error.message || error) + "), original kept.")]);
 				});

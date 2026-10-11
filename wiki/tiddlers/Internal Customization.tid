@@ -1,21 +1,17 @@
 created: 20251209173135787
 creator: nikorion
-modified: 20251209212034475
+modified: 20261011225410882
 modifier: nikorion
 tags: 
 title: Internal Customization
+type: text/vnd.tiddlywiki
 
 ;Styles
 *$:/styles/custom.css
 ;Palettes
 *$:/palettes/SpartanDayNikorion
 *$:/palettes/SpartanNightNikorion
-;Plugins
-*$:/styles/highlight.css
 ;Macros
 *$:/core/macros/font-preview
 *$:/core/macros/font-edition
 *$:/core/ui/Components/font-info
-;Fonts
-*$:/fonts/Play
-*$:/fonts/Baumans

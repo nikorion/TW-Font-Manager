@@ -5,7 +5,7 @@
         "tiddlywiki/tiddlyweb",
         "nikorion/font-manager",
         "tiddlywiki/highlight",
-        "nikorion/pkm",
+        "nikorion/dyntable",
         "nikorion/plugin-info-tree",
         "nikorion/scroll-layout",
         "nikorion/detect-language"
@@ -60,7 +60,7 @@
             "text/plain",
             "",
             "publishFilter",
-            "-[[$:/config/SyncFilter]] -[[$:/config/FileSystemPaths]] -[[$:/config/OriginalTiddlerPaths]] -[[$:/plugins/wikilabs/link-to-tabs]]",
+            "-[[$:/config/SyncFilter]] -[[$:/config/FileSystemPaths]] -[[$:/config/OriginalTiddlerPaths]] -[[$:/plugins/wikilabs/link-to-tabs]] -[[$:/plugins/wikilabs/link-to-tabs/config]]",
             "--render",
             "$:/core/templates/tiddlywiki5.js",
             "[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]",
