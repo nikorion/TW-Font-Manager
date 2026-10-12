@@ -1,6 +1,6 @@
 created: 20251209021726203
 creator: nikorion
-modified: 20261011212636554
+modified: 20261012004901862
 modifier: nikorion
 show-fantasy: 0
 show-mono: 0
@@ -11,7 +11,26 @@ tags:
 title: Webfont Preview
 type: text/vnd.tiddlywiki
 
-\import $:/core/macros/font-preview
+\procedure font-table(type)
+<table class="table-center">
+	<$list filter="[prefix[$:/fonts]field:font-type<type>sort[title]]">
+		<$wikify name="font-family" text=<$text text={{{ [<currentTiddler>removeprefix[$:/fonts/]addprefix[font-family:]] }}}>
+			<tr>
+				<td style="border:1px darkgrey solid">
+					<$transclude tiddler="$:/core/ui/Components/font-info"/>
+					<span style=<<font-family>>>
+						<h1 style="margin:-5px 0 -10px 0;">
+							Sphinx of black quartz, judge my vow
+						</h1>
+						<<.lorem>>
+					</span>
+				</td>
+			</tr>
+		</$wikify>
+	</$list>
+</table>
+\end
+
 
 <table class="table-borderless table-lines table-center">
   <tr>
