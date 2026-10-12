@@ -46,19 +46,19 @@ Sources are in `src/font-manager/`.
 
 ## Version history
 
-**v0.5.0**
+**v0.5.0 (2026-10-12)**
 
 New "Fonts" tab in the plugin info panel (`fonts.tid`): a Dynamic Table listing of the installed fonts when `nikorion/dyntable` is loaded (columns in `dyntable/`), a plain list otherwise; `rank` field for star ratings.
 
-**v0.4.0**
+**v0.4.0 (2026-10-11)**
 
 TTF/OTF files are converted to WOFF2 on import (vendored `woff2-encoder`, `pnpm vendor:woff2`; setting `convert-to-woff2`).
 
-**v0.3.0**
+**v0.3.0 (2026-10-10)**
 
 Font manager: import of dropped font files; the bundled fonts moved out of the plugin.
 
-**v0.1.0**
+**v0.1.0 (2026-07-16)**
 
 Initial release — font collection extracted into its own plugin.
 

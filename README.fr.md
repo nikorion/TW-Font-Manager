@@ -46,19 +46,19 @@ Les sources sont dans `src/font-manager/`.
 
 ## Historique des versions
 
-**v0.5.0**
+**v0.5.0 (2026-10-12)**
 
 Nouvel onglet « Polices » dans le panneau d'info du plugin (`fonts.tid`) : un tableau Dynamic Table des polices installées quand `nikorion/dyntable` est chargé (colonnes dans `dyntable/`), une simple liste sinon ; champ `rank` pour les étoiles.
 
-**v0.4.0**
+**v0.4.0 (2026-10-11)**
 
 Les fichiers TTF/OTF sont convertis en WOFF2 à l'import (`woff2-encoder` vendoré, `pnpm vendor:woff2` ; réglage `convert-to-woff2`).
 
-**v0.3.0**
+**v0.3.0 (2026-10-10)**
 
 Gestionnaire de polices : import des fichiers de police déposés ; les polices embarquées sortent du plugin.
 
-**v0.1.0**
+**v0.1.0 (2026-07-16)**
 
 Première version — collection de polices extraite dans son propre plugin.
 
