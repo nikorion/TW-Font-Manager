@@ -7,3 +7,4 @@ Fonts/Column/name: Font
 Fonts/Column/sample: Preview
 Fonts/Column/type: Type
 Fonts/Column/rank: Rank
+Fonts/DyntableHint: The list is nicer as a sortable table with a live preview: install the [[Dynamic Table|https://nikorion.github.io/TW-Dynamic-Table/]] plugin (`nikorion/dyntable`) in this wiki.

@@ -10,10 +10,12 @@ type: text/vnd.tiddlywiki
 
 <%else%>
 
+<p class="tc-muted"><<font-manager-lingo Fonts/DyntableHint>></p>
+
 <ul>
 <$list filter="[prefix[$:/fonts/]sort[title]]">
 <$let name={{{ [<currentTiddler>removeprefix[$:/fonts/]] }}}>
-<li><$draggable tiddler=<<currentTiddler>> tag="span"><$link><$text text=<<name>>/></$link></$draggable> — <span style={{{ [<name>addprefix[font-family:"]addsuffix[";font-size:1.3em;]] }}}><<font-manager-lingo Fonts/Sample>></span> <$list filter="[<currentTiddler>get[rank]!is[blank]]" variable="nk-rank"><$text text=<<nk-rank>>/></$list></li>
+<li><$draggable tiddler=<<currentTiddler>> tag="span"><$link><$text text=<<name>>/></$link></$draggable> — <span style={{{ [<name>addprefix[font-family:"]addsuffix[";font-size:1.3em;]] }}}><<font-manager-lingo Fonts/Sample>></span> <$list filter="[<currentTiddler>get[rank]!is[blank]]" variable="nk-rank"><$text text=<<nk-rank>>/></$list> <$list filter="[<currentTiddler>get[font-type]!is[blank]]" variable="nk-type">(<$text text=<<nk-type>>/>)</$list></li>
 </$let>
 <$list-empty><li><<font-manager-lingo Fonts/Empty>></li></$list-empty>
 </$list>

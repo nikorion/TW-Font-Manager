@@ -7,3 +7,4 @@ Fonts/Column/name: Police
 Fonts/Column/sample: Aperçu
 Fonts/Column/type: Type
 Fonts/Column/rank: Classement
+Fonts/DyntableHint: La liste est plus agréable en tableau triable avec aperçu : installez le plugin [[Dynamic Table|https://nikorion.github.io/TW-Dynamic-Table/]] (`nikorion/dyntable`) dans ce wiki.

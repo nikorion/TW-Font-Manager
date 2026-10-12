@@ -1,11 +1,26 @@
 title: $:/plugins/nikorion/font-manager/language/en-GB/readme
 type: text/vnd.tiddlywiki
 
-A web font manager for TiddlyWiki. Drop a font file (`.woff2`, `.woff`, `.ttf`, `.otf`) onto the wiki: it is turned into a self-contained stylesheet tiddler (`$:/fonts/<Name>`, content type (MIME type) `text/css`, tagged ''$:/tags/Stylesheet'') holding a `@font-face` rule with the font embedded in base64 — no network request, works offline and in single-file wikis.
+A web font manager for TiddlyWiki. Drop a font file (`.woff2`, `.woff`, `.ttf`, `.otf`) onto the wiki: it becomes a self-contained font tiddler holding a `@font-face` rule with the font embedded in base64 — no network request, works offline and in single-file wikis.
 
-! Usage
+!! Font tiddler
 
-Drag a font file onto the wiki and import it from the usual import screen. Once imported, the typeface is available to any CSS in the wiki. Reference it by name with `font-family`, e.g. in a stylesheet tiddler:
+```css
+title: $:/fonts/<Name>
+tags:  $:/tags/Stylesheet
+type:  text/css
+
+@font-face {
+    font-family: "<Name>";
+    font-weight: normal;
+    font-style: normal;
+    src: url(data:font/woff2;base64,<<<LONG_BASE64_CODE>>>) format("woff2");
+}
+```
+
+! Using the font
+
+Drag a font file onto the wiki and import it from the usual import screen. Once imported, the font is available to any CSS in the wiki. Reference it by name with `font-family`, for example in a stylesheet tiddler:
 
 ```css
 .tc-tiddler-title { font-family: "Lobster"; }
@@ -13,22 +28,30 @@ Drag a font file onto the wiki and import it from the usual import screen. Once 
 
 Or inline in wikitext:
 
-```
-@@font-family:"Caveat Brush";Some fancy text@@
+```xml
+@@font-family:"Caveat Brush";
+Some fancy text.
+@@
 ```
 
-Imported fonts are always stored as `text/css` tiddlers. TiddlyWiki does not strictly require it for a stylesheet, but it is the right choice: with the default wikitext type, TiddlyWiki would parse the very long base64 data as wikitext (slow, and a `//` sequence, which base64 can contain, would be read as italic markup and corrupt the font). If you create a font tiddler by hand, give it the `text/css` type too. The plugin itself ships no font.
+Imported fonts are always stored as `text/css` tiddlers. This is not mandatory for a stylesheet, but with the default wikitext type TiddlyWiki would parse the very long base64 data as wikitext (which would cause slowness, and could even corrupt the font if the base64 contains a `//` sequence, read as italic markup).
+
+The plugin itself ships no fonts, but it offers some conveniences: a filterable list -- by various criteria -- of the fonts imported with the manager (those whose title starts with `$:/fonts/`), and their editing, to set their type by hand (sans, serif, mono, script, fantasy), give them a note or a rank (★ to ★★★★), and record their licence and source.
+
+Online font collections: [[Dafont|https://www.dafont.com/]] • [[FontLibrary|https://fontlibrary.org/]] • [[FontSquirrel|https://www.fontsquirrel.com/]] • [[Google Fonts|https://fonts.google.com/]]
 
 ! WOFF2 conversion
 
-`.ttf` and `.otf` files are converted to WOFF2 while they are imported (typically 40 to 80 % smaller). The encoder is only loaded the first time a font is converted. Turn this off in ''Settings'' > ''Font Manager''. `.woff` and `.woff2` files are kept as they are.
+`.ttf` and `.otf` files are converted to WOFF2 while they are imported (typically 40 to 80 % smaller). The conversion can be turned off in ''Settings'' > ''Font Manager''. `.woff` (WOFF 1) files are not converted: they are already compressed, so they would gain too little from WOFF2.
 
-! Saving to disk (Node.js wiki folders)
+The conversion relies on the [[woff2-encoder|https://github.com/itskyedo/woff2-encoder]] library (MIT licence), a WebAssembly WOFF2 encoder bundled in the plugin. It was chosen because it is entirely self-contained: the WebAssembly module is inlined in the file, with no download and no server. The conversion therefore runs in the browser, offline and in a single-file wiki, like the rest of the plugin. As it weighs about 1 MB, it is only loaded when you import a `.ttf` or `.otf` file, and only once per browsing session.
 
-With a wiki folder served by Node.js, TiddlyWiki writes an imported font next to your other tiddlers, as a flattened file such as `$__fonts_Lobster.css`. To keep them together in a sub-folder, add this line at the top of a tiddler titled `$:/config/FileSystemPaths` (one filter per line, the first match wins):
+! Saving to disk
 
-```
+With a wiki served by Node.js, the imported font is written next to your other tiddlers, in the `tiddlers/` folder, as a flattened file such as `$__fonts_Lobster.css`. To group the fonts in a sub-folder, write this line in a tiddler titled `$:/config/FileSystemPaths`:
+
+```xml
 [prefix[$:/fonts/]search-replace:g:regexp[/|\\],[_]addprefix[system/fonts/]]
 ```
 
-Fonts then go to `tiddlers/system/fonts/`. If you already have a `$:/config/FileSystemPaths` tiddler, add the line above the existing ones. This is a TiddlyWiki setting, so a plugin cannot do it for you; single-file wikis are not concerned.
+The font files will then be redirected to `tiddlers/system/fonts/`. If a `$:/config/FileSystemPaths` tiddler already exists, add the line above the others, since the first ones take priority. This is a TiddlyWiki setting: a plugin cannot do it itself; single-file wikis are not concerned.

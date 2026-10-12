@@ -25,9 +25,6 @@ exports.platforms = ["browser"];
 exports.after = ["load-modules"];
 exports.synchronous = true;
 
-// Warn above this size (bytes of the final font): base64 adds ~33 %
-const LARGE_FONT_BYTES = 300 * 1024;
-
 // Core registers these four as base64 file types (boot.js)
 const FORMATS = {
 	"font/woff2": "woff2",
@@ -58,13 +55,12 @@ function bytesToBase64(bytes) {
 	return btoa(binary);
 }
 
-function buildFields(family, mime, format, base64, size, note) {
-	const fields = {
+function buildFields(family, mime, format, base64) {
+	return {
 		title: "$:/fonts/" + family,
 		type: "text/css",
 		tags: "$:/tags/Stylesheet",
 		"font-family": family,
-		"font-format": format,
 		text: "@font-face {\n" +
 			"\tfont-family: '" + family + "';\n" +
 			"\tfont-weight: normal;\n" +
@@ -72,13 +68,6 @@ function buildFields(family, mime, format, base64, size, note) {
 			"\tsrc: url(data:" + mime + ";base64," + base64 + ") format('" + format + "');\n" +
 			"}\n"
 	};
-	if(note) {
-		fields.note = note;
-	} else if(size > LARGE_FONT_BYTES) {
-		fields.note = "Large font (" + Math.round(size / 1024) + " KB)" +
-			(format === "woff2" ? "." : ": consider converting to WOFF2.");
-	}
-	return fields;
 }
 
 exports.startup = function() {
@@ -98,8 +87,10 @@ exports.startup = function() {
 		if(convert) {
 			reader.onload = function(event) {
 				const original = new Uint8Array(event.target.result),
-					asIs = function(note) {
-						return buildFields(family, info.type, format, bytesToBase64(original), original.length, note);
+					asIs = function(reason) {
+						// eslint-disable-next-line no-console
+						console.warn("font-manager: " + reason);
+						return buildFields(family, info.type, format, bytesToBase64(original));
 					};
 				let encoder;
 				try {
@@ -109,7 +100,7 @@ exports.startup = function() {
 					return;
 				}
 				encoder.compress(original).then(function(woff2) {
-					info.callback([buildFields(family, "font/woff2", "woff2", bytesToBase64(woff2), woff2.length)]);
+					info.callback([buildFields(family, "font/woff2", "woff2", bytesToBase64(woff2))]);
 				}, function(error) {
 					info.callback([asIs("WOFF2 conversion failed (" + (error && error.message || error) + "), original kept.")]);
 				});
@@ -118,7 +109,7 @@ exports.startup = function() {
 		} else {
 			reader.onload = function(event) {
 				const dataUri = event.target.result;
-				info.callback([buildFields(family, info.type, format, dataUri.substring(dataUri.indexOf(",") + 1), file.size)]);
+				info.callback([buildFields(family, info.type, format, dataUri.substring(dataUri.indexOf(",") + 1))]);
 			};
 			reader.readAsDataURL(file);
 		}

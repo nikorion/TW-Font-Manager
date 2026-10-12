@@ -1,9 +1,24 @@
 title: $:/plugins/nikorion/font-manager/language/fr-FR/readme
 type: text/vnd.tiddlywiki
 
-Un gestionnaire de polices web pour TiddlyWiki. Déposez un fichier de police (`.woff2`, `.woff`, `.ttf`, `.otf`) sur le wiki : il devient un tiddler feuille de style autonome (`$:/fonts/<Nom>`, type de contenu (type MIME) `text/css`, taggé ''$:/tags/Stylesheet'') contenant une règle `@font-face` avec la police embarquée en base64 — aucune requête réseau, fonctionne hors ligne et dans les wikis mono-fichier.
+Un gestionnaire de polices web pour TiddlyWiki. Déposez un fichier de police (`.woff2`, `.woff`, `.ttf`, `.otf`) sur le wiki : il devient un tiddler de police autonome contenant une règle `@font-face` avec la police embarquée en base64 — aucune requête réseau, fonctionne hors ligne et dans les wikis mono-fichier.
 
-! Utilisation
+!! Tiddler de police
+
+```css
+title: $:/fonts/<Nom>
+tags:  $:/tags/Stylesheet
+type:  text/css
+
+@font-face {
+    font-family: "<Nom>";
+    font-weight: normal;
+    font-style: normal;
+    src: url(data:font/woff2;base64,<<<LONG_CODE_EN_BASE64>>>) format("woff2");
+}
+```
+
+! Utilisation de la police
 
 Glissez un fichier de police sur le wiki et importez-le depuis l'écran d'import habituel. Une fois importée, la police est disponible pour n'importe quelle CSS du wiki. Référencez-la par son nom avec `font-family`, par exemple dans un tiddler feuille de style :
 
@@ -13,22 +28,30 @@ Glissez un fichier de police sur le wiki et importez-le depuis l'écran d'import
 
 Ou en ligne dans du wikitext :
 
-```
-@@font-family:"Caveat Brush";Un texte fantaisie@@
+```xml
+@@font-family:"Caveat Brush";
+Un texte fantaisie.
+@@
 ```
 
-Les polices importées sont toujours enregistrées en tiddlers `text/css`. TiddlyWiki ne l'impose pas strictement pour une feuille de style, mais c'est le bon choix : avec le type wikitext par défaut, TiddlyWiki analyserait les très longues données base64 comme du wikitexte (lent, et une séquence `//`, que le base64 peut contenir, serait lue comme du balisage d'italique et corromprait la police). Si vous créez un tiddler de police à la main, donnez-lui aussi le type `text/css`. Le plugin lui-même n'embarque aucune police.
+Les polices importées sont toujours enregistrées en tiddlers `text/css`. Ce n'est pas obligatoire pour une feuille de style, mais avec le type wikitext par défaut, TiddlyWiki analyserait les très longues données base64 comme du wikitexte (ce qui provoquerait des lenteurs, voire corromprait la police si le base64 contient une séquence `//`, lue comme du balisage d'italique).
+
+Le plugin lui-même n'embarque pas de polices, mais il offre des facilités. Comme une liste filtrable -- selon différents critères -- de celles qu'on a importées avec le gestionnaire (dont le titre commence par `$:/fonts/`) et leur édition, pour définir leur type à la main (sans, serif, mono, script, fantasy), leur donner une note ou un rang (★ à ★★★★), fournir la licence et la source.
+
+Exemples de collections en ligne de polices : [[Dafont|https://www.dafont.com/fr/]] • [[FontLibrary|https://fontlibrary.org/]] • [[FontSquirrel|https://www.fontsquirrel.com/]] • [[Google Fonts|https://fonts.google.com/]]
 
 ! Conversion en WOFF2
 
-Les fichiers `.ttf` et `.otf` sont convertis en WOFF2 pendant l'import (généralement 40 à 80 % plus légers). L'encodeur n'est chargé qu'à la première conversion. Désactivez-la dans ''Réglages'' > ''Font Manager''. Les fichiers `.woff` et `.woff2` sont conservés tels quels.
+Les fichiers `.ttf` et `.otf` sont convertis en WOFF2 pendant l'import (généralement 40 à 80 % plus légers). Conversion qui peut être désactivée dans ''Réglages'' > ''Font Manager''. Les fichiers `.woff` (WOFF 1) ne sont pas convertis : étant déjà compressés, ils gagneraient trop peu à passer en WOFF2.
 
-! Enregistrement sur disque (dossiers wiki Node.js)
+La conversion repose sur la bibliothèque [[woff2-encoder|https://github.com/itskyedo/woff2-encoder]] (licence MIT), un encodeur WOFF2 en WebAssembly, embarqué dans le plugin. Elle a été retenue parce que son code est entièrement autonome : le module WebAssembly est inclus dans le fichier, sans téléchargement ni serveur. La conversion se fait donc dans le navigateur, hors ligne et dans un wiki mono-fichier, comme le reste du plugin. Comme elle pèse environ 1 Mo, elle n'est chargée que si vous importez un `.ttf` ou un `.otf`, et une seule fois par session de navigation.
 
-Avec un dossier wiki servi par Node.js, TiddlyWiki écrit une police importée à côté de vos autres tiddlers, sous la forme d'un fichier aplati du type `$__fonts_Lobster.css`. Pour les regrouper dans un sous-dossier, ajoutez cette ligne en tête d'un tiddler intitulé `$:/config/FileSystemPaths` (un filtre par ligne, la première correspondance l'emporte) :
+! Enregistrement sur disque
 
-```
+Avec un wiki servi par Node.js, la police importée est écrite à côté de vos autres tiddlers, dans le dossier `tiddlers/`, sous la forme d'un fichier aplati du type `$__fonts_Lobster.css`. Pour regrouper les polices dans un sous-dossier, écrivez cette ligne dans un tiddler intitulé `$:/config/FileSystemPaths` :
+
+```xml
 [prefix[$:/fonts/]search-replace:g:regexp[/|\\],[_]addprefix[system/fonts/]]
 ```
 
-Les polices vont alors dans `tiddlers/system/fonts/`. Si vous avez déjà un tiddler `$:/config/FileSystemPaths`, ajoutez la ligne au-dessus des existantes. C'est un réglage de TiddlyWiki : un plugin ne peut pas le faire à votre place ; les wikis mono-fichier ne sont pas concernés.
+Les fichiers des polices vont alors être redirigé dans `tiddlers/system/fonts/`. Si un tiddler `$:/config/FileSystemPaths` existe déjà, ajoutez la ligne au-dessus des autres, car les premières sont prioritaires. C'est un réglage de TiddlyWiki : un plugin ne peut pas le faire lui-même ; les wikis mono-fichier ne sont pas concernés.
