@@ -36,7 +36,7 @@ Some fancy text.
 
 Imported fonts are always stored as `text/css` tiddlers. This is not mandatory for a stylesheet, but with the default wikitext type TiddlyWiki would parse the very long base64 data as wikitext (which would cause slowness, and could even corrupt the font if the base64 contains a `//` sequence, read as italic markup).
 
-The plugin itself ships no fonts, but it offers some conveniences: a filterable list -- by various criteria -- of the fonts imported with the manager (those whose title starts with `$:/fonts/`), and their editing, to set their type by hand (sans, serif, mono, script, fantasy), give them a note or a rank (★ to ★★★★), and record their licence and source.
+The plugin itself ships no fonts, but it offers some conveniences: a filterable list -- by various criteria -- of the fonts imported with the manager (those whose title starts with `$:/fonts/`), and their editing, to set their type by hand (sans, serif, mono, script, fantasy), give them a rank (★ to ★★★★), and record their licence and source.
 
 Online font collections: [[Dafont|https://www.dafont.com/]] • [[FontLibrary|https://fontlibrary.org/]] • [[FontSquirrel|https://www.fontsquirrel.com/]] • [[Google Fonts|https://fonts.google.com/]]
 

@@ -36,7 +36,7 @@ Un texte fantaisie.
 
 Les polices importées sont toujours enregistrées en tiddlers `text/css`. Ce n'est pas obligatoire pour une feuille de style, mais avec le type wikitext par défaut, TiddlyWiki analyserait les très longues données base64 comme du wikitexte (ce qui provoquerait des lenteurs, voire corromprait la police si le base64 contient une séquence `//`, lue comme du balisage d'italique).
 
-Le plugin lui-même n'embarque pas de polices, mais il offre des facilités. Comme une liste filtrable -- selon différents critères -- de celles qu'on a importées avec le gestionnaire (dont le titre commence par `$:/fonts/`) et leur édition, pour définir leur type à la main (sans, serif, mono, script, fantasy), leur donner une note ou un rang (★ à ★★★★), fournir la licence et la source.
+Le plugin lui-même n'embarque pas de polices, mais il offre des facilités. Comme une liste filtrable -- selon différents critères -- de celles qu'on a importées avec le gestionnaire (dont le titre commence par `$:/fonts/`) et leur édition, pour définir leur type à la main (sans, serif, mono, script, fantasy), leur attribuer un rang (★ à ★★★★), fournir la licence et la source.
 
 Exemples de collections en ligne de polices : [[Dafont|https://www.dafont.com/fr/]] • [[FontLibrary|https://fontlibrary.org/]] • [[FontSquirrel|https://www.fontsquirrel.com/]] • [[Google Fonts|https://fonts.google.com/]]
 
